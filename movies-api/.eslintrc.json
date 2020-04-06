@@ -1,0 +1,18 @@
+// "ecmaVersion": 2018-> todo mi código va usar la versión de ecmascript 2018 en adelante
+// "extends": ["eslint:recommended", "prettier"], -> vamos a extender de la configuración de eslint recomendada y que vamos a usar una configuración compatible con prettier
+// "env": { -> vamos a usar variables de entorno es6, node y mocha porque cuando lleguemos a la hora de hacer test si utilizamos unas utilidades globales el eslint nos puede devolver un error
+// "no-console": "warn" -> y finalmente la regla de no-console no va ser un error sino un warn
+{
+    "parserOptions": {
+      "ecmaVersion": 2018
+    },
+    "extends": ["eslint:recommended", "prettier"],
+    "env": {
+      "es6": true,
+      "node": true,
+      "mocha": true
+    },
+    "rules": {
+      "no-console": "warn"
+    }
+  }
