@@ -4,6 +4,7 @@ const app = express();
 
 const { config } = require('./config/index');
 const moviesApi = require('./routes/movies.js');
+const userMoviesApi = require('./routes/userMovies.js');
 
 // Analiza los cuerpos de las solicitudes entrantes en un middleware antes que los manejadores de ruta disponibles bajo la propiedad req.body.
 const bodyParser = require('body-parser')
@@ -23,7 +24,9 @@ app.use(cors())
 //app.use(express.json()); // este middleware permite a nuestras rutas interpretar los datos en formato json que le enviamos
 app.use(bodyParser.json())
 
+// routes
 moviesApi(app);
+userMoviesApi(app);
 
 // Catch 404
 app.use(notFoundHandler);
