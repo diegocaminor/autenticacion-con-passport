@@ -10,6 +10,9 @@ const { createUserSchema } = require('../utils/schemas/users');
 
 const { config } = require('../config');
 
+const THIRTY_DAYS_IN_SEC = 2592000; // 30 días
+const TWO_HOURS_IN_SEC = 3600; // 2 horas
+
 // Basic strategy
 require('../utils/auth/strategies/basic');
 
@@ -22,6 +25,7 @@ function authApi(app) {
 
   router.post('/sign-in', async function(req, res, next) {
     const { apiKeyToken } = req.body;
+    const { rememberMe } = req.body;
 
     if (!apiKeyToken) {
       next(boom.unauthorized('apiKeyToken is required'));
@@ -55,6 +59,14 @@ function authApi(app) {
 
           const token = jwt.sign(payload, config.authJwtSecret, {
             expiresIn: '15m'
+          });
+
+          // Si el atributo rememberMe es verdadero la expiración será en 30 dias
+          // de lo contrario la expiración será en 2 horas
+          res.cookie("token", token, {
+            httpOnly: !config.dev,
+            secure: !config.dev,
+            maxAge: rememberMe ? THIRTY_DAYS_IN_SEC : TWO_HOURS_IN_SEC
           });
 
           return res.status(200).json({ token, user: { id, name, email } });
