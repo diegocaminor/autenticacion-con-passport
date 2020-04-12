@@ -12,11 +12,14 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 
-//  Basic strategy
+// Basic strategy
 require("./utils/auth/strategies/basic");
 
 // OAuth strategy
 require("./utils/auth/strategies/oauth");
+
+// Google strategy
+require("./utils/auth/strategies/google");
 
 app.post("/auth/sign-in", async function(req, res, next) {
   passport.authenticate("basic", function(error, data) {
@@ -105,6 +108,7 @@ app.delete("/user-movies/:userMovieId", async function(req, res, next) {
   }
 });
 
+// Autenticación OAuth2.0 con Google
 app.get(
   "/auth/google-oauth",
   passport.authenticate("google-oauth", {
@@ -115,6 +119,33 @@ app.get(
 app.get(
   "/auth/google-oauth/callback",
   passport.authenticate("google-oauth", { session: false }),
+  function(req, res, next) {
+    if (!req.user) {
+      next(boom.unauthorized());
+    }
+
+    const { token, ...user } = req.user;
+
+    res.cookie("token", token, {
+      httpOnly: !config.dev,
+      secure: !config.dev
+    });
+
+    res.status(200).json(user);
+  }
+);
+
+// Autenticación con Google usando OpenID Connect
+app.get(
+  "/auth/google",
+  passport.authenticate("google", {
+    scope: ["email", "profile", "openid"]
+  })
+);
+
+app.get(
+  "/auth/google/callback",
+  passport.authenticate("google", { session: false }),
   function(req, res, next) {
     if (!req.user) {
       next(boom.unauthorized());
