@@ -1,4 +1,5 @@
 const express = require("express");
+const helmet = require('helmet');
 const passport = require("passport");
 const session = require("express-session");
 const boom = require("@hapi/boom");
@@ -11,6 +12,7 @@ const app = express();
 
 // body parser
 app.use(express.json());
+app.use(helmet());
 app.use(cookieParser());
 // esto es requerido debido a que la librería de twitter para iniciar sesión exige que tengamos una sesión activa, cabe resaltar que twitter para la autenticación de usuarios maneja el protocolo OAuth1.0
 app.use(session({ secret: config.sessionSecret }));

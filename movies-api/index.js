@@ -1,5 +1,6 @@
 const express = require('express');
-const cors = require('cors')
+const cors = require('cors');
+const helmet = require('helmet');
 const app = express();
 
 const { config } = require('./config/index');
@@ -25,6 +26,7 @@ app.use(cors())
 // body parser
 //app.use(express.json()); // este middleware permite a nuestras rutas interpretar los datos en formato json que le enviamos
 app.use(bodyParser.json())
+app.use(helmet());
 
 // routes
 authApi(app);
