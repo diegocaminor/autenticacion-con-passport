@@ -10,7 +10,7 @@ const moviesApi = require('./routes/movies.js');
 const userMoviesApi = require('./routes/userMovies.js');
 
 // Analiza los cuerpos de las solicitudes entrantes en un middleware antes que los manejadores de ruta disponibles bajo la propiedad req.body.
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
 
 const {
   logErrors,
@@ -21,11 +21,11 @@ const {
 const notFoundHandler = require('./utils/middleware/notFoundHandler.js');
 
 // permitir solicitudes cruzadas
-app.use(cors())
+app.use(cors());
 
 // body parser
 //app.use(express.json()); // este middleware permite a nuestras rutas interpretar los datos en formato json que le enviamos
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 app.use(helmet());
 
 // routes

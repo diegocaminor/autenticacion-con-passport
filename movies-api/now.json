@@ -1,12 +1,16 @@
 {
-    "name": "platzivideo",
-    "version": 2,
-    "builds": [{"src": "index.js", "use": "@now/node"}],
-    "routes": [{"src": "/(.*)", "dest": "/index.js"}],
-    "env": {
-        "DB_USER": "@platzi-video-db-user",
-        "DB_PASSWORD": "@platzi-video-db-password",
-        "DB_HOST": "@platzi-video-db-host",
-        "DB_NAME": "@platzi-video-db-name"
-    }
+  "version": 2,
+  "builds": [{ "src": "index.js", "use": "@now/node" }],
+  "routes": [{ "src": "/(.*)", "dest": "/index.js" }],
+  "env": {
+    "DB_USER": "@platzi-video-db-user",
+    "DB_PASSWORD": "@platzi-video-db-password",
+    "DB_HOST": "@platzi-video-db-host",
+    "DB_NAME": "@platzi-video-db-name",
+    "DEFAULT_ADMIN_PASSWORD": "platzi-video-default-admin-password",
+    "DEFAULT_USER_PASSWORD": "platzi-video-default-user-password",
+    "AUTH_JWT_SECRET": "platzi-video-auth-jwt-secret",
+    "PUBLIC_API_KEY_TOKEN": "platzi-video-public-api-key-token",
+    "ADMIN_API_KEY_TOKEN": "platzi-video-admin-api-key-token"
+  }
 }
