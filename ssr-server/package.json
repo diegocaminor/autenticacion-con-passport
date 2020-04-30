@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "DEBUG=express:*,app:* nodemon index",
-    "start": "NODE_ENV=production node index"
+    "start": "NODE_ENV=production node index",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "dependencies": {
     "@hapi/boom": "^9.1.0",
@@ -22,11 +24,13 @@
     "passport-http": "^0.3.0",
     "passport-linkedin-oauth2": "^2.0.0",
     "passport-oauth": "^1.0.0",
-    "passport-twitter": "^1.0.4"
+    "passport-twitter": "^1.0.4",
+    "snyk": "^1.316.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.3"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "snyk": true
 }
