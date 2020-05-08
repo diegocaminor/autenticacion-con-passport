@@ -6,7 +6,10 @@ const ApiKeysService = require('../services/apiKeys');
 const UsersService = require('../services/users');
 const validationHandler = require('../utils/middleware/validationHandler');
 
-const { createUserSchema, createProviderUserSchema } = require('../utils/schemas/users');
+const {
+  createUserSchema,
+  createProviderUserSchema
+} = require('../utils/schemas/users');
 
 const { config } = require('../config');
 
@@ -63,7 +66,7 @@ function authApi(app) {
 
           // Si el atributo rememberMe es verdadero la expiración será en 30 dias
           // de lo contrario la expiración será en 2 horas
-          res.cookie("token", token, {
+          res.cookie('token', token, {
             httpOnly: !config.dev,
             secure: !config.dev,
             maxAge: rememberMe ? THIRTY_DAYS_IN_SEC : TWO_HOURS_IN_SEC
@@ -77,7 +80,11 @@ function authApi(app) {
     })(req, res, next);
   });
 
-  router.post('/sign-up', validationHandler(createUserSchema), async function(req, res, next) {
+  router.post('/sign-up', validationHandler(createUserSchema), async function(
+    req,
+    res,
+    next
+  ) {
     const { body: user } = req;
 
     try {

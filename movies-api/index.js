@@ -3,6 +3,9 @@ const cors = require('cors');
 const helmet = require('helmet');
 const app = express();
 
+// permitir solicitudes cruzadas
+app.use(cors());
+
 const { config } = require('./config/index');
 
 const authApi = require('./routes/auth');
@@ -19,9 +22,6 @@ const {
 } = require('./utils/middleware/errorHandlers.js');
 
 const notFoundHandler = require('./utils/middleware/notFoundHandler.js');
-
-// permitir solicitudes cruzadas
-app.use(cors());
 
 // body parser
 //app.use(express.json()); // este middleware permite a nuestras rutas interpretar los datos en formato json que le enviamos
